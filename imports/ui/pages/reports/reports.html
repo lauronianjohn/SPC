@@ -1,0 +1,165 @@
+<template name="Reports">
+    <div class="reports-section">
+        <div class="wrap">
+            <div class="content-wrap page">
+                <div class="semi-nav" style="padding-bottom: 20px;">
+                    <div class="semi-nav-menu">
+                        <ul>
+                            <li class="semi-nav-list active">
+                                <a href="" id="overall">OVERALL</a>
+                            </li>
+                            <li class="semi-nav-list">
+                                <a href="" id="per-sample">PER SAMPLE</a>
+                            </li>
+                            <li class="semi-nav-list" >
+                                <a href="" id="configuration">CONFIGURATION</a>
+                            </li>
+                            <li class="semi-nav-list" style="float:right">
+                                <a href="" id="tester">TESTER</a>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+                {{#if showCharts}}
+                    {{#if configurations}}
+                    <div id="template-1">
+                        <div class="card">
+                            <div class="card-header form-title">
+                                <span style="font-size:15px;">Histogram</span>
+                            </div>
+                            <div class="card-body">
+                                <div class="charts">
+                                    {{> Histogram}}
+                                </div>
+                            </div>
+                        </div>
+                        <div class="card">
+                            <div class="card-header form-title">
+                                <span style="font-size:15px;">Candlestick</span>
+                            </div>
+                            <div class="card-body">
+                                <div class="charts">
+                                    {{> Candlestick}}
+                                </div>
+                            </div>
+                        </div>
+                        <div class="card">
+                            <div class="card-header form-title">
+                                <span style="font-size:15px;">X-bar Chart</span>
+                            </div>
+                            <div class="card-body">
+                                <div class="charts">
+                                    {{> X_bar}}
+                                </div>
+                            </div>
+                        </div>
+                        <div class="card">
+                            <div class="card-header form-title">
+                                <span style="font-size:15px;">Range Chart</span>
+                            </div>
+                            <div class="card-body">
+                                <div class="charts">
+                                    {{> Range}}
+                                </div>
+                            </div>
+                        </div>
+                        <div class="card">
+                            <div class="card-header form-title">
+                                <span style="font-size:15px;">Yield Chart</span>
+                            </div>
+                            <div class="card-body">
+                                <div class="charts">
+                                    {{> Yield}}
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    {{else}}
+                        <div class="card">
+                            <div class="card-body">
+                                <p class="col-xs-12" style="color: #F16362; font-weight: bold;">No Data To Display</p>
+                            </div>
+                        </div>
+                    {{/if}}
+                {{/if}}
+                <div id="template-2" style="display: none;">
+                    <div class="card">
+                            {{#if configurations}}
+                        <div class="card-header form-title">
+                            <span style="font-size:15px;">Configurations</span>
+                        </div>
+                        <div class="card-body">
+                            <table class="table table-hover">
+                                <thead>
+                                    <tr>
+                                        <th rowspan="2" style="border-right: 1px solid #ddd;">Product</th>
+                                        <th rowspan="2" style="border-right: 1px solid #ddd;">Sample Size</th>
+                                        <th rowspan="2" style="border-right: 1px solid #ddd;">Tester</th>
+                                        <th rowspan="2" style="border-right: 1px solid #ddd;">Parameter</th>
+                                        <th colspan="2" style="border-right: 1px solid #ddd;">Control Limit</th>
+                                        <th colspan="2" style="border-right: 1px solid #ddd;">Spec Limit</th>
+                                        <th rowspan="2" style="border-right: 1px solid #ddd;">Configured By</th>
+                                        <th rowspan="2" style="border-right: 1px solid #ddd;">Selected</th>
+                                    </tr>
+                                    <tr>
+                                        <th style="border-right: 1px solid #ddd;">Upper</th>
+                                        <th style="border-right: 1px solid #ddd;">Lower</th>
+                                        <th style="border-right: 1px solid #ddd;">Upper</th>
+                                        <th style="border-right: 1px solid #ddd;">Lower</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    {{#each configurations}}
+                                        <tr>
+                                            <td>{{product.name}}</td>
+                                            <td>{{sampleSize}}</td>
+                                            <td>{{tester.name}}</td>
+                                            <td>{{parameter.name}}</td>
+                                            <td>{{controlLimit.upperControlLimit}}</td>
+                                            <td>{{controlLimit.lowerControlLimit}}</td>
+                                            <td>{{specLimit.upperSpecLimit}}</td>
+                                            <td>{{specLimit.lowerSpecLimit}}</td>
+                                            <td>{{configuredBy.emailAddress}}</td>
+                                            <td>
+                                                <input type="radio" class="option-input radio" data-id="{{_id}}" value="{{_id}}" name="example" checked="{{first _id}}">
+                                            </td>
+                                        </tr>
+                                    {{/each}}
+                                </tbody>
+                            </table>
+                        </div>
+                        {{else}}
+                        <div class="card-body">
+                            <p class="col-xs-12" style="color: #F16362; font-weight: bold;">No Results Found</p>
+                        </div>
+                        {{/if}}
+                    </div>
+                </div>
+                {{#if isTester}}
+                    {{#if configurations}}
+                    <div id="template-3">
+                        <div class="card">
+                            <div class="card-header form-title">
+                                <span style="font-size:15px;">Tester Chart</span>
+                                <a href="javascript:void(0);" class="reports align-right" id="reports-products-list">Configurations</a>
+                                {{> PerItem}}
+                            </div>
+                            <div class="card-body">
+                                <div class="charts">
+                                    {{> TesterChart}}
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    {{else}}
+                        <div class="card">
+                            <div class="card-body">
+                                <p class="col-xs-12" style="color: #F16362; font-weight: bold;">No Result Found</p>
+                            </div>
+                        </div>
+                    {{/if}}
+                {{/if}}
+            </div>
+        </div>
+    </div>
+</template>

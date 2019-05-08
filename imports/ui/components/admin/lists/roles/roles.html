@@ -1,0 +1,115 @@
+<template name="Roles_list">
+    <div class="wrap">
+        {{> Alert_message}}
+        <div class="content-wrap page">
+            <!-- <div class="card search-bar">
+                <i class="fa fa-search" aria-hidden="true"></i><input type="text" name="search" class="form-control search">
+            </div> -->
+            <div class="semi-nav">
+                <div class="semi-nav-menu">
+                    <ul>
+                        {{viewButton}}
+                        {{#if isSuperAdmin}}
+                        <li class="active">
+                            <a href="" id="view-all">VIEW ALL</a>
+                        </li>
+                        {{/if}}
+                        <li>
+                            <a href="" id="view-admins">ADMINISTRATORS</a>
+                        </li>
+                        <li>
+                            <a href="" id="view-users">USERS</a>
+                        </li>
+                        <li style="float:right">
+                            <div class="header-search align-right">
+                                <input type="text" id="search" name="search" placeholder="Search....">
+                                <a href="" class="search-button">
+                                    <i class="fa fa-search" aria-hidden="true"></i>
+                                </a>
+                            </div>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+            <div class="card">
+                <div class="card-body">
+                    {{#if searching}}
+                        <p class="col-xs-12" style="color: #384D68; font-weight: bold;">Searching...</p>
+                    {{else}}
+                        {{#if searchKeyword}}
+                        <table class="table table-hover">
+                            {{#if foundRoles}}
+                            <thead>
+                                <tr>
+                                    <th>Role</th>
+                                    <th>Type</th>
+                                    {{#if viewActions}}<th>Actions</th>{{/if}}
+                                </tr>
+                            </thead>
+                            <tbody>
+                                {{#each foundRoles}}
+                                    {{> Roles_data}}
+                                {{/each}}
+                            </tbody>
+                            {{else}}
+                            <p class="col-xs-12" style="color: #F16362; font-weight: bold;">Nothing found for {{searchKeyword}}.</p>
+                            {{/if}}
+                        </table>
+                        {{else}}
+                        <table class="table table-hover">
+                            {{#if roles}}
+                            <thead>
+                                <tr>
+                                    <th>Role</th>
+                                    <th>Type</th>
+                                    {{#if viewActions}}<th>Actions</th>{{/if}}
+                                </tr>
+                            </thead>
+                            <tbody>
+                                {{#each roles}}
+                                    {{> Roles_data}}
+                                {{/each}}
+                            </tbody>
+                            {{else}}
+                                <p class="col-xs-12" style="color: #F16362; font-weight: bold;">No Results Found</p>
+                            {{/if}}
+                        </table>
+                        {{/if}}
+                    {{/if}}
+                </div>
+                <div class="card-footer">
+                </div>
+            </div>
+        </div>
+        {{#if viewCreateButton}}
+            <a href="/admin/create-role" class="float-add session">
+                <i class="fa fa-plus my-float"></i>
+            </a>
+        {{/if}}
+    </div>
+    {{> Delete_modal}}
+    {{> Role_view}}
+</template>
+
+<template name="Roles_data">
+    <tr data-id="{{_id}}">
+        <div class="role-list list">
+            <td>{{ role.role }}</td>
+            <td>{{ ucFirst role.type }}</td>
+        </div>
+        {{#if viewActions}}
+        <td>
+            {{#if viewEditButton}}
+                <a href="/admin/edit-role/{{_id}}" class="icon icon-info edit-role session" title="Edit Role">
+                    <i class="fa fa-edit"></i>
+                </a>
+            {{/if}}
+            {{#if viewDeleteButton}}
+                <a href="javascript:void(0)" class="icon icon-danger delete-role" title="Delete Role">
+                    <i class="fa fa-times"></i>
+                </a>
+            {{/if}}
+        </td>
+        {{/if}} 
+    </tr>
+</template>

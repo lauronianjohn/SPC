@@ -1,0 +1,619 @@
+<!-- Change_password -->
+<template name="Change_password">
+    <div id="change-password" class="modal">
+        <div class="modal-content" style="width: 28% !important;">
+            <div class="modal-header">
+                <h5>Change Password</h5>
+            </div>
+            <!-- <form class="change-pass" id="change-pass"> -->
+                <div class="modal-body" style="height: 400px;">
+                    <div class="modal-form">
+                        <div class="forms">
+                            <div class="form-group">
+                                <label>Old Password</label>
+                                <input type="password" class="form-control" id="oldPassword" name="oldPassword">
+                            </div>
+                            <div class="form-group">
+                                <label>New Password</label>
+                                <input type="password" class="form-control" id="newPassword" name="newPassword">
+                            </div>
+                            <div class="form-group">
+                                <label>Confirm New Password</label>
+                                <input type="password" class="form-control" id="changePassword" name="changePassword">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="button cancel">Cancel</button>
+                    <button type="button" class="button submit">Save</button>
+                </div>
+            <!-- </form> -->
+        </div>
+    </div>
+</template>
+
+<template name="Configurations">
+    <div id="configurationModal" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5>Configurations</h5>
+            </div>
+            <div class="modal-body" style="height: 400px;">
+                <table class="table table-hover">
+                    <thead>
+                        <tr>
+                            <th rowspan="2" style="border-right: 1px solid #ddd;">Product Name</th>
+                            <th rowspan="2" style="border-right: 1px solid #ddd;">Actual Size</th>
+                            {{#if overAll}}
+                            <th rowspan="2" style="border-right: 1px solid #ddd;">Tester</th>
+                            <th rowspan="2" style="border-right: 1px solid #ddd;">Parameter</th>
+                            {{/if}}
+                            <th colspan="2" style="border-right: 1px solid #ddd;">Control Limit</th>
+                            <th colspan="2" style="border-right: 1px solid #ddd;">Spec Limit</th>
+                        </tr>
+                        <tr>
+                            <th style="border-right: 1px solid #ddd;">Upper</th>
+                            <th style="border-right: 1px solid #ddd;">Lower</th>
+                            <th style="border-right: 1px solid #ddd;">Upper</th>
+                            <th style="border-right: 1px solid #ddd;">Lower</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {{#each configuration}}
+                        <tr>
+                            <td class="productName" data-id="{{_id}}">{{product.name}}</td>
+                            <td class="sampleSize">{{sampleSize}}</td>
+                            {{#if overAll}}
+                            <td class="upperControlLimit">{{tester.name}}</td>
+                            <td class="upperControlLimit">{{parameter.name}}</td>
+                            {{/if}}
+                            <td class="upperControlLimit">{{controlLimit.upperControlLimit}}</td>
+                            <td class="lowerControlLimit">{{controlLimit.lowerControlLimit}}</td>
+                            <td class="upperSpecLimit">{{specLimit.upperSpecLimit}}</td>
+                            <td class="lowerSpecLimit">{{specLimit.lowerSpecLimit}}</td>
+                        </tr>
+                        {{/each}}
+                    </tbody>
+                </table>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn-modal modal-default cancel">Cancel</button>
+                <button type="button" class="btn-modal modal-info select-configuration">Select</button>
+            </div>
+        </div>
+    </div>
+</template>
+
+<!-- Configuration_modal -->
+<template name="Configuration_Error">
+    <div id="configurationError" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <a href="" class="close-toggle align-right"><i class="fa fa-times" aria-hidden="true"></i></a>
+                <h5>Configuration Error</h5>
+            </div>
+            <div class="modal-body">
+                <h4>The sample size you provide is less than the actual size of our data, are you sure you want to continue this ?</h4>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn-modal modal-default cancel">No</button>
+                <button type="button" class="btn-modal modal-danger yes">Yes</button>
+            </div>
+        </div>
+    </div>
+</template>
+
+<!-- Custom_dashboard -->
+<template name="Custom_dashboard">
+    <div id="formModal" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5>Graphs</h5>
+            </div>
+            <div class="modal-body" style="height:288px">
+                <div class="graph-image">
+                    <div class="row">
+                        <div class="col-4">
+                            <div class="image-content">
+                                <div class="checked">
+                                    <i class="fa fa-check" aria-hidden="true"></i>
+                                </div>
+                                <img src="/img/Xbar.JPG" alt="X_bar" class="sm-img">
+                                <p>X Bar</p>
+                            </div>
+                        </div>
+                        <div class="col-4">
+                            <div class="image-content">
+                                <div class="checked">
+                                    <i class="fa fa-check" aria-hidden="true"></i>
+                                </div>
+                                <img src="/img/candlestick.JPG" alt="Candlestick" class="sm-img">
+                                <p>Candlestick</p>
+                            </div>
+                        </div>
+                        <div class="col-4">
+                            <div class="image-content">
+                                <div class="checked">
+                                    <i class="fa fa-check" aria-hidden="true"></i>
+                                </div>
+                                <img src="/img/range.JPG" alt="Range" class="sm-img">
+                                <p>Range Bar</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-4">
+                            <div class="image-content">
+                                <div class="checked">
+                                    <i class="fa fa-check" aria-hidden="true"></i>
+                                </div>
+                                <img src="/img/histogram.JPG" alt="Histogram" class="sm-img">
+                                <p>Histogram</p>
+                            </div>
+                        </div>
+                        <div class="col-4">
+                            <div class="image-content">
+                                <div class="checked">
+                                    <i class="fa fa-check" aria-hidden="true"></i>
+                                </div>
+                                <img src="/img/yield.JPG" alt="Yield" class="sm-img">
+                                <p>Yield</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn-modal modal-default cancel">Cancel</button>
+                <button type="button" class="btn-modal modal-info select-graph">Select</button>
+            </div>
+        </div>
+    </div>
+</template>
+
+<template name="CustomDash_Confirmation">
+    <div id="confirmDash" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5>Save</h5>
+            </div>
+            <div class="modal-body">
+                <h4>Do You Want To Save Your Customized Dashboard</h4>
+                <input type="hidden" id="delete-id" name="remove">
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn-modal modal-default no">Cancel</button>
+                <button type="button" class="btn-modal modal-info save">Save</button>
+            </div>
+        </div>
+    </div>
+</template>
+
+<!-- Delete_modal -->
+<template name="Delete_modal">
+    <div id="deleteModal" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <a href="" class="close-toggle align-right"><i class="fa fa-times" aria-hidden="true"></i></a>
+                <h5>Delete Record</h5>
+            </div>
+            <div class="modal-body">
+                <h4>Are you sure you want to delete this record ?</h4>
+                <input type="hidden" id="delete-id" name="remove">
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn-modal modal-default cancel">Cancel</button>
+                <button type="button" class="btn-modal modal-danger delete">Delete</button>
+            </div>
+        </div>
+    </div>
+</template>
+
+<!-- Parameter -->
+<template name="Parameters">
+    <div id="parameterModal" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5>Parameters</h5>
+            </div>
+            <div class="modal-body" style="height: 400px;">
+                <table class="table table-hover">
+                    <thead>
+                        <tr>
+                            <th>Parameter Name</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {{#each parameters}}
+                        <tr>
+                            <td class="parameter" data-id="{{_id}}">{{name}}</td>
+                        </tr>
+                        {{/each}}
+                    </tbody>
+                </table>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn-modal modal-default cancel">Cancel</button>
+                <button type="button" class="btn-modal modal-info select-params">Select</button>
+            </div>
+        </div>
+    </div>
+</template>
+
+<!--per item-->
+<template name="PerItem">
+    <div id="PerItemModal" class="modal">
+        <div class="modal-content" style="width: 66%;">
+            <div class="modal-header">
+                <h5>Parameters</h5>
+            </div>
+            <div class="modal-body" style="height: 400px;overflow: hidden;">
+                <div class="row">
+                    <div class="col-5" style="border-right: solid 2px #f3f3f3;overflow: auto;height: 290px;">
+                        <div class="test">
+                            <table class="table table-hover">
+                                <thead>
+                                    <tr>
+                                        <th>Item Code</th>
+                                        <th>Product Name</th>
+                                        <th>Measurement</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    {{#each products}}
+                                    <tr class="perItem-list">
+                                        <td class="product" data-id="{{_id}}" data-name="{{product.name}}">{{itemCode}}</td>
+                                        <td class="product" data-id="{{_id}}" data-name="{{product.name}}">{{product.name}}</td>
+                                        <td class="product" data-id="{{_id}}" data-name="{{product.name}}">{{measurement}}</td>
+                                    </tr>
+                                    {{/each}}
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                    <div class="col-7" style="overflow: auto;height: 290px;">
+                        <table class="table table-hover">
+                            <thead>
+                                <tr>
+                                    <th rowspan="2">Tester</th>
+                                    <th rowspan="2">Parameter</th>
+                                    <th colspan="2">Specification Limit</th>
+                                    <th colspan="2">Control Limit</th>
+                                </tr>
+                                <tr>
+                                    <th rowspan="2">Upper</th>
+                                    <th rowspan="2">Lower</th>
+                                    <th rowspan="2">Upper</th>
+                                    <th rowspan="2">Lower</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                {{#each itemDetails}}
+                                <tr>
+                                    <td>{{tester}}</td>
+                                    <td>{{parameter}}</td>
+                                    <td>{{#if specUp}} {{specUp}} {{else}} No Config  {{/if}}</td>
+                                    <td>{{#if specLow}} {{specLow}} {{else}} No Config {{/if}}</td>
+                                    <td>{{#if controlUp}} {{controlUp}} {{else}} No Config {{/if}}</td>
+                                    <td>{{#if controlLow}} {{controlLow}} {{else}} No Config {{/if}}</td>
+                                </tr>
+                                {{/each}}
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn-modal modal-default cancel">Close</button>
+            </div>
+        </div>
+    </div>
+</template>
+    
+<!-- Product -->
+<template name="Products">
+    <div id="productModal" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5>Products</h5>
+            </div>
+            <div class="modal-body" style="height: 400px;">
+                <table class="table table-hover">
+                    <thead>
+                        <tr>
+                            <th>Product Name</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {{#each products}}
+                        <tr>
+                            <td class="product" data-id="{{_id}}">{{name}}</td>
+                        </tr>
+                        {{/each}}
+                    </tbody>
+                </table>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn-modal modal-default cancel">Cancel</button>
+                <button type="button" class="btn-modal modal-info select-product">Select</button>
+            </div>
+        </div>
+    </div>
+</template>
+
+<!-- Role_view -->
+<template name="Role_view">
+    <div id="role-view" class="modal">
+        <input type="hidden" id="roleId">
+        <div class="modal-content">
+            <div class="modal-header">
+                <a href="" class="close-toggle align-right"><i class="fa fa-times" aria-hidden="true"></i></a>
+                <h5>{{rolePermission.role.role}}</h5>
+            </div>
+            <div class="modal-body" style="height: 400px;">
+                <div class="wrap">
+                    <div class="card modal-card">
+                        <div class="row">
+                            <div class="col-6 form-inputs">
+                                <div class="card-body">
+                                    <div class="forms">
+                                        <div class="form-group">
+                                            <label>Role</label>
+                                            <input type="text" class="form-control" name="roleName" value="{{rolePermission.role.role}}"
+                                                disabled>
+                                        </div>
+                                        <div class="form-group">
+                                            <label>Description</label>
+                                            <textarea name="description" id="Description" rows="7" class="form-control"
+                                                value="{{rolePermission.role.description}}" disabled></textarea>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-3 form-inputs" style="height: 307px;">
+                                <div class="card-body">
+                                    <div class="forms">
+                                        <p>Role Type</p>
+                                        <div class="form-group">
+                                            <select name="module" id="select_module" class="form-control" disabled>
+                                                <option value="admin">{{ucFirst rolePermission.role.type}}</option>
+                                            </select>
+                                        </div>
+                                        <div class="module-list" style="margin-top: 20px;">
+                                            <table class="table table-hover">
+                                                <tbody>
+                                                    {{#each appModules}}
+                                                    <tr class="module-list {{#if dashboard module}} selected {{/if}}">
+                                                        <td class="module" module-value="{{module}}">{{name}}</td>
+                                                    </tr>
+                                                    {{/each}}
+                                                </tbody>
+                                            </table>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-3 form-role" id="or">
+                                <div class="card-body" style="padding: 20px 0px;">
+                                    <p></p>
+                                    <p>Permissions</p>
+                                    <div class="permission">
+                                        {{> Check_boxes}}
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</template>
+
+<!-- User_profile -->
+<template name="User_profile">
+    <div id="user-profile" class="modal">
+        <div class="modal-content" style="height: 419px;">
+            <div class="modal-header">
+                <a href="" class="close-toggle align-right"><i class="fa fa-times" aria-hidden="true"></i></a>
+                <h5>{{userProfileData.profile.lastName}}, {{userProfileData.profile.firstName}}</h5>
+            </div>
+            <div class="modal-body" style="height: 400px;max-height: 349px!important;">
+                <div class="wrap">
+                    <div class="card modal-card">
+                        <div class="row">
+                            <div class="col-6 form-inputs" style="height: 348px;">
+                                <div class="card-body">
+                                    <div class="forms">
+                                        <p id="error-msg" style="color: #F16362;"></p>
+                                        <div class="row">
+                                            <div class="col-6">
+                                                <div class="form-group">
+                                                    <label>First Name</label>
+                                                    <input type="text" class="form-control" name="firstName" value="{{userProfileData.profile.firstName}}"
+                                                        disabled>
+                                                </div>
+                                            </div>
+                                            <div class="col-6">
+                                                <div class="form-group">
+                                                    <label>Last Name</label>
+                                                    <input type="text" class="form-control" name="lastName" value="{{userProfileData.profile.lastName}}"
+                                                        disabled>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="col-12">
+                                                <div class="form-group">
+                                                    <label>Address</label>
+                                                    <input type="text" class="form-control" name="address" value="{{userProfileData.profile.address}}"
+                                                        disabled>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="col-12">
+                                                <div class="form-group">
+                                                    <label>Contact No.</label>
+                                                    <input type="text" class="form-control" name="contactNo" value="{{userProfileData.profile.contactNo}}"
+                                                        disabled>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-6 form-role">
+                                <div class="card-body">
+                                    <div class="forms">
+                                        <p></p>
+                                        <div class="form-group">
+                                            <label>Email Address</label>
+                                            <input type="text" class="form-control" name="emailAddress" value="{{userProfileData.emails.[0].address}}"
+                                                disabled>
+                                        </div>
+                                        <div class="form-group">
+                                            <label>Username</label>
+                                            <input type="text" class="form-control" name="emailAddress" value="{{userProfileData.username}}"
+                                                disabled>
+                                        </div>
+                                        <div class="form-group">
+                                            <label>User Type</label>
+                                            <input type="text" class="form-control" value="{{ucFirst userProfileData.profile.type}}"
+                                                disabled>
+                                        </div>
+                                        <div class="form-group">
+                                            <label>Role</label>
+                                            <input type="text" class="form-control" name="role" value="{{userProfileData.profile.role.role}}"
+                                                disabled>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</template>
+
+<!-- User_view -->
+<template name="User_view">
+    <div id="user-view" class="modal">
+        <div class="modal-content" style="height: 419px;">
+            <div class="modal-header">
+                <a href="" class="close-toggle align-right"><i class="fa fa-times" aria-hidden="true"></i></a>
+                <h5>{{userData.profile.lastName}}, {{userData.profile.firstName}}</h5>
+            </div>
+            <div class="modal-body" style="height: 400px;max-height: 349px!important;">
+                <div class="wrap">
+                    <div class="card modal-card">
+                        <div class="row">
+                            <div class="col-6 form-inputs" style="height: 348px;">
+                                <div class="card-body">
+                                    <div class="forms">
+                                        <p id="error-msg" style="color: #F16362;"></p>
+                                        <div class="row">
+                                            <div class="col-6">
+                                                <div class="form-group">
+                                                    <label>First Name</label>
+                                                    <input type="text" class="form-control" name="firstName" value="{{userData.profile.firstName}}"
+                                                        disabled>
+                                                </div>
+                                            </div>
+                                            <div class="col-6">
+                                                <div class="form-group">
+                                                    <label>Last Name</label>
+                                                    <input type="text" class="form-control" name="lastName" value="{{userData.profile.lastName}}"
+                                                        disabled>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="col-12">
+                                                <div class="form-group">
+                                                    <label>Address</label>
+                                                    <input type="text" class="form-control" name="address" value="{{userData.profile.address}}"
+                                                        disabled>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="col-12">
+                                                <div class="form-group">
+                                                    <label>Contact No.</label>
+                                                    <input type="text" class="form-control" name="contactNo" value="{{userData.profile.contactNo}}"
+                                                        disabled>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-6 form-role">
+                                <div class="card-body">
+                                    <div class="forms">
+                                        <p></p>
+                                        <div class="form-group">
+                                            <label>Email Address</label>
+                                            <input type="text" class="form-control" name="emailAddress" value="{{userData.emails.[0].address}}"
+                                                disabled>
+                                        </div>
+                                        <div class="form-group">
+                                            <label>Username</label>
+                                            <input type="text" class="form-control" name="emailAddress" value="{{userData.username}}"
+                                                disabled>
+                                        </div>
+                                        <div class="form-group">
+                                            <label>User Type</label>
+                                            <input type="text" class="form-control" value="{{ucFirst userData.profile.type}}"
+                                                disabled>
+                                        </div>
+                                        <div class="form-group">
+                                            <label>Role</label>
+                                            <input type="text" class="form-control" value="{{userData.profile.role.role}}"
+                                                disabled>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</template>
+
+<!-- Tester -->
+<template name="Testers">
+    <div id="testerModal" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5>Testers</h5>
+            </div>
+            <div class="modal-body" style="height: 400px;">
+                <table class="table table-hover">
+                    <thead>
+                        <tr>
+                            <th>Tester Name</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {{#each testers}}
+                        <tr>
+                            <td class="tester" data-id="{{_id}}">{{name}}</td>
+                        </tr>
+                        {{/each}}
+                    </tbody>
+                </table>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn-modal modal-default cancel">Cancel</button>
+                <button type="button" class="btn-modal modal-info select-tester">Select</button>
+            </div>
+        </div>
+    </div>
+</template>

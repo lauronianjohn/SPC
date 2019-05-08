@@ -1,0 +1,78 @@
+<template name="Configurations_list">
+    <div class="wrap">
+        {{> Alert_message}}
+        <div class="content-wrap page">
+            <div class="semi-nav">
+                <div class="semi-nav-menu">
+                    <ul>
+                        <li style="float:right">
+                            <div class="header-search align-right">
+                                <input type="text" id="search" name="search" placeholder="Search....">
+                                <a href="" class="search-button">
+                                    <i class="fa fa-search" aria-hidden="true"></i>
+                                </a>
+                            </div>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+            <div class="card">
+                <div class="card-body">
+                    <table class="table table-hover">
+                        {{#if configurations}}
+                            <thead>
+                                <tr>
+                                    <th rowspan="2" style="border-right: 1px solid #ddd;">Product</th>
+                                    <th rowspan="2" style="border-right: 1px solid #ddd;">Sample Size</th>
+                                    <th rowspan="2" style="border-right: 1px solid #ddd;">Tester</th>
+                                    <th rowspan="2" style="border-right: 1px solid #ddd;">Parameter</th>
+                                    <th colspan="2" style="border-right: 1px solid #ddd;">Control Limits</th>
+                                    <th colspan="2" style="border-right: 1px solid #ddd;">Specification Limits</th>
+                                    <th rowspan="2" style="border-right: 1px solid #ddd;">Action</th>
+                                </tr>
+                                <tr>
+                                    <th style="border-right: 1px solid #ddd;">Upper</th>
+                                    <th style="border-right: 1px solid #ddd;">Lower</th>
+                                    <th style="border-right: 1px solid #ddd;">Upper</th>
+                                    <th style="border-right: 1px solid #ddd;">Lower</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                {{#each configurations}}
+                                    {{> Configuration_data}}
+                                {{/each}}
+                            </tbody>
+                        {{else}}
+                            <p class="col-xs-12" style="color: #F16362; font-weight: bold;">No Results Found</p>
+                        {{/if}}
+                    </table>
+                </div>
+                <div class="card-footer">
+    
+                </div>
+            </div>
+            <a href="/create-configuration" class="float-add">
+                <i class="fa fa-plus my-float"></i>
+            </a>
+        </div>
+    </div>
+    {{> Delete_modal}}
+</template>
+
+<template name="Configuration_data">
+    <tr>
+        <td>{{product.name}}</td>
+        <td>{{sampleSize}}</td>
+        <td>{{tester.name}}</td>
+        <td>{{parameter.name}}</td>
+        <td>{{controlLimit.upperControlLimit}}</td>
+        <td>{{controlLimit.lowerControlLimit}}</td>
+        <td>{{specLimit.upperSpecLimit}}</td>
+        <td>{{specLimit.lowerSpecLimit}}</td>
+        <td>
+            <a href="javascript:void(0)" class="icon icon-danger remove-data" title="Remove data">
+                <i class="fa fa-times"></i>
+            </a>
+        </td>
+    </tr>
+</template>

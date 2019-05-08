@@ -1,0 +1,55 @@
+<template name="Admin_sidebar">
+    <div class="sidebar">
+        <div class="sidebar-content">
+            <div class="logo">
+                <a href="/admin" style="font-size:20px" class="mini-logo">FL</a>
+                <a href="/admin" style="font-size:20px" class="whole-logo">FLEX</a>
+            </div>
+            <div class="user">
+                <div class="user-img">
+                    <i class="fa fa-user-circle" aria-hidden="true"></i>
+                </div>
+                <a href="" class="user-info collapsed">
+                    <span>
+                        {{currentAdmin.username}}
+                        <i class="fa fa-sort-asc" aria-hidden="true" style="display:none;"></i>
+                        <i class="fa fa-sort-desc" aria-hidden="true"></i>
+                    </span>
+                </a>
+                <div class="dropdown" style="display:none;">
+                    <ul class="dropdown-menu">
+                        <li class="menu-item">
+                            <a class="menu-link" id="change-pass" href="">Change Password</a>
+                        </li>
+                        <li class="menu-item">
+                            <a class="menu-link" id="logout-admin" href="/login">Logout</a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+            <div class="sidebar-menu">
+                <ul>
+                    <li class="menu-item {{#if currentRouteIs 'admin-home-page'}} active {{else}} inactive {{/if}}">
+                        <a href="/admin" class="menu-link">
+                            <i class="fa fa-tachometer" aria-hidden="true"></i>
+                            <p>Dashboard</p>
+                        </a>
+                    </li>
+                    <li class="menu-item {{#if currentRouteIs 'admin-roles-list-page'}} active {{else}} inactive {{/if}}">
+                        <a href="/admin/roles-list" class="menu-link">
+                            <i class="fa fa-users" aria-hidden="true"></i>
+                            <p>Roles</p>
+                        </a>
+                    </li>
+                    <li class="menu-item {{#if currentRouteIs 'admin-users-list-page'}} active {{else}} inactive {{/if}}">
+                        <a href="/admin/users-list" class="menu-link">
+                            <i class="fa fa-user" aria-hidden="true"></i>
+                            <p>Users</p>
+                        </a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </div>
+    {{> Change_password}}
+</template>

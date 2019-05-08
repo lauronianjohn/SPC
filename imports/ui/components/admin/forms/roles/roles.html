@@ -1,0 +1,189 @@
+<!-- Check_boxes -->
+<template name="Check_boxes">
+    <div class="forms checkboxes">
+        <div class="form-group" style="border-bottom: solid 2px #f3f3f3;padding-bottom: 25px;">
+            <p style="font-weight:600;display: inline;">ACCESS ALL</p>
+            <label class="switch" style="float:right;">
+                <input type="checkbox" id="access-all" value="access-all">
+                <div class="slider round">
+                    <span class="on">ON</span>
+                    <span class="off">OFF</span>
+                </div>
+            </label>
+        </div>
+        <div class="form-group">
+            <p style="font-weight:600;">CREATE</p>
+            <label class="switch" style="float:right;">
+                <input type="checkbox" class="functionName" id="create" value="create">
+                <div class="slider round">
+                    <span class="on">ON</span>
+                    <span class="off">OFF</span>
+                </div>
+            </label>
+        </div>
+        <div class="form-group">
+            <p style="font-weight:600;">VIEW</p>
+            <label class="switch" style="float:right;">
+                <input type="checkbox" class="functionName" id="view" value="view">
+                <div class="slider round">
+                    <span class="on">ON</span>
+                    <span class="off">OFF</span>
+                </div>
+            </label>
+        </div>
+        <div class="form-group">
+            <p style="font-weight:600;">EDIT</p>
+            <label class="switch" style="float:right;">
+                <input type="checkbox" class="functionName" id="edit" value="edit">
+                <div class="slider round">
+                    <span class="on">ON</span>
+                    <span class="off">OFF</span>
+                </div>
+            </label>
+        </div>
+        <div class="form-group">
+            <p style="font-weight:600;">DELETE</p>
+            <label class="switch" style="float:right;">
+                <input type="checkbox" class="functionName" id="delete" value="delete">
+                <div class="slider round">
+                    <span class="on">ON</span>
+                    <span class="off">OFF</span>
+                </div>
+            </label>
+        </div>
+    </div>
+</template>
+
+<!-- Role_create -->
+<template name="Role_create">
+    <div class="role-create-section">
+        <div class="wrap">
+            {{> Alert_message}}
+            <div class="card">
+                <form class="create-role-form" id="create-role-form">
+                    <div class="card-header form-title">
+                        <span style="font-size:15px;">CREATE ROLE</span>
+                    </div>
+                    <div class="row">
+                        <div class="col-5 form-inputs">
+                            <div class="card-body">
+                                <div class="forms">
+                                    <div class="form-group">
+                                        <label>Role</label>
+                                        <input type="text" class="form-control" name="role" required>
+                                    </div>
+                                    <div class="form-group">
+                                        <label>Description</label>
+                                        <textarea name="description" id="description" rows="7" class="form-control"></textarea>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-3 form-inputs" style="height: 307px;">
+                            <div class="card-body">
+                                <div class="forms">
+                                    <label>Choose Role Type</label>
+                                    <div class="form-group">
+                                        <select class="form-control" name="module" id="module">
+                                            <option value="admin">Admin</option>
+                                            <option value="user">User</option>
+                                        </select>
+                                    </div>
+                                    <div class="modules" style="margin-top: 20px;">
+                                        <table class="table table-hover">
+                                            <tbody>
+                                                {{#each modules}}
+                                                    <tr class="module-list {{#if dashboard module}} selected {{/if}}">
+                                                        <td class="module" module-value="{{module}}">{{name}}</td>
+                                                    </tr>
+                                                {{/each}}
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-4 form-role" id="or">
+                            <div class="card-body">
+                                <p></p>
+                                <br>
+                                {{> Check_boxes}}
+                                <div class="submit-button">
+                                    <button class="button submit">Create</button>
+                                    <a href="/admin/roles-list" class="button cancel create-user-form">Cancel</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</template>
+
+<!-- Role_update -->
+<template name="Role_update">
+    <div class="role-update-section">
+        <div class="wrap">
+            {{> Alert_message}}
+            <div class="card">
+                <form class="createrole-form" id="createrole-form">
+                    <div class="card-header form-title">
+                        <span style="font-size:15px;">UPDATE ROLE</span>
+                    </div>
+                    <div class="row">
+                        <div class="col-5 form-inputs">
+                            <div class="card-body">
+                                <div class="forms">
+                                    <div class="form-group">
+                                        <label>Role</label>
+                                        <input type="text" class="form-control" name="role" value="{{roleData.role.role}}"
+                                            disabled>
+                                    </div>
+                                    <div class="form-group">
+                                        <label>Description</label>
+                                        <textarea name="description" id="Description" rows="7" class="form-control" value="{{roleData.role.description}}"></textarea>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-3 form-inputs" style="height: 307px;">
+                            <div class="card-body">
+                                <div class="forms">
+                                    <p>Choose Role Type</p>
+                                    <div class="form-group">
+                                        <select name="module" id="module" class="form-control" data-value="{{roleData.role.type}}" disabled>
+                                            <option value="{{roleData.role.type}}" selected>{{ucFirst roleData.role.type}}</option>
+                                        </select>
+                                    </div>
+                                    <div class="modules" style="margin-top: 20px;">
+                                        <table class="table table-hover" id="table">
+                                            <tbody>
+                                                {{#each modules}}
+                                                    <tr class="module-list {{#if dashboard module}} selected {{/if}}">
+                                                        <td class="module" module-value="{{module}}">{{name}}</td>
+                                                    </tr>
+                                                {{/each}}
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-4 form-role" id="or">
+                            <div class="card-body">
+                                <p></p>
+                                <br>
+                                {{> Check_boxes}}
+                                <div class="submit-button">
+                                    <button class="button submit">Save</button>
+                                    <a href="/admin/roles-list" class="button cancel create-user-form">Cancel</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</template>

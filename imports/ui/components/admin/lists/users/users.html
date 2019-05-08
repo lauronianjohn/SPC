@@ -1,0 +1,123 @@
+<template name="Users_list">
+    <div class="wrap">
+        {{> Alert_message}}
+        <div class="content-wrap page">
+            <!-- <div class="card search-bar">
+                <i class="fa fa-search" aria-hidden="true"></i><input type="text" name="search" class="form-control search">
+            </div> -->
+            <div class="semi-nav">
+                <div class="semi-nav-menu">
+                    <ul>
+                        {{#if isSuperAdmin}}
+                        <li class="active">
+                            <a href="" id="view-all">VIEW ALL</a>
+                        </li>
+                        {{/if}}
+                        <li>
+                            <a href="" id="view-admins">ADMINISTRATORS</a>
+                        </li>
+                        <li>
+                            <a href="" id="view-users">USERS</a>
+                        </li>
+                        <li style="float:right">
+                            <div class="header-search align-right">
+                                <input type="text" id="search" name="search" placeholder="Search....">
+                                <a href="" class="search-button">
+                                    <i class="fa fa-search" aria-hidden="true"></i>
+                                </a>
+                            </div>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+            <div class="card">
+                <div class="card-body">
+                    {{#if searching}}
+                        <p class="col-xs-12" style="color: #384D68; font-weight: bold;">Searching...</p>
+                    {{else}}
+                        {{#if searchKeyword}}
+                        <table class="table table-hover">
+                            {{#if foundUsers}}
+                            <thead>
+                                <tr>
+                                    <th>First Name</th>
+                                    <th>Last Name</th>
+                                    <th>Date Created</th>
+                                    <th>Date Updated</th>
+                                    <th>User Type</th>
+                                    {{#if viewActions}}<th>Actions</th>{{/if}}
+                                </tr>
+                            </thead>
+                            <tbody>
+                                {{#each foundUsers}}
+                                    {{> User_data}}
+                                {{/each}}
+                            </tbody>
+                            {{else}}
+                            <p class="col-xs-12" style="color: #F16362; font-weight: bold;">Nothing found for {{searchKeyword}}.</p>
+                            {{/if}}
+                        </table>
+                        {{else}}
+                        <table class="table table-hover">
+                            {{#if users}}
+                            <thead>
+                                <tr>
+                                    <th>First Name</th>
+                                    <th>Last Name</th>
+                                    <th>Date Created</th>
+                                    <th>Date Updated</th>
+                                    <th>User Type</th>
+                                    {{#if viewActions}}<th>Actions</th>{{/if}}
+                                </tr>
+                            </thead>
+                            <tbody>
+                                {{#each users}}
+                                    {{> User_data}} 
+                                {{/each}}
+                            </tbody>
+                            {{else}}
+                                <p class="col-xs-12" style="color: #F16362; font-weight: bold;">No Results Found</p>
+                            {{/if}}
+                        </table>
+                        {{/if}}
+                    {{/if}}
+                </div>
+                <div class="card-footer">
+                </div>
+            </div>
+        </div>
+        {{#if viewActions}}
+            {{#if createButton}}
+                <a href="/admin/create-user" class="float-add session">
+                    <i class="fa fa-plus my-float"></i>
+                </a>
+            {{/if}}
+        {{/if}}
+    </div>
+    {{> Delete_modal}}
+    {{> User_view}}
+</template>
+
+<!-- list of user data-->
+<template name="User_data">
+    <tr data-id="{{_id}}">
+        <div class="user-list list">
+            <td>{{ profile.firstName }}</td>
+            <td>{{ profile.lastName }}</td>
+            <td>{{ formatDate createdAt }}</td>
+            <td>{{ formatDate updatedAt }}</td>
+            <td>{{ ucFirst profile.type }}</td>
+        </div>
+
+        {{#if viewActions}}
+        <td>
+            <a href="/admin/edit-user/{{_id}}" class="icon icon-info session" title="Edit User">
+                <i class="fa fa-edit"></i>
+            </a>
+            <a href="javascript:void(0)" class="icon icon-danger remove-user" title="Delete User">
+                <i class="fa fa-times"></i>
+            </a>
+        </td>
+        {{/if}}
+    </tr>
+</template>

@@ -1,0 +1,233 @@
+<!-- User_create -->
+<template name="User_create">
+    <div class="wrap">
+        {{> Alert_message}}
+        <div class="user-create-section">
+            <div class="card">
+                <form class="user-form" id="create-user-form">
+                    <div class="card-header form-title">
+                        <span style="font-size:15px;">CREATE USER</span>
+                    </div>
+                    <div class="row">
+                        <div class="col-6 form-inputs" style="height: 466px;">
+                            <div class="card-body">
+                                <div class="forms">
+                                    <p id="error-msg" style="color: #F16362;"></p>
+                                    <div class="row">
+                                        <div class="col-6">
+                                            <div class="form-group">
+                                                <label>First Name</label>
+                                                <input type="text" class="form-control" name="firstName" required>
+                                            </div>
+                                        </div>
+                                        <div class="col-6">
+                                            <div class="form-group">
+                                                <label>Last Name</label>
+                                                <input type="text" class="form-control" name="lastName" required>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-12">
+                                            <div class="form-group">
+                                                <label>Address</label>
+                                                <input type="text" class="form-control" name="address">
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-6">
+                                            <div class="form-group">
+                                                <label>Contact No.</label>
+                                                <input type="text" class="form-control" name="contactNo">
+                                            </div>
+                                        </div>
+                                        <div class="col-6">
+                                            <div class="form-group">
+                                                <label>Email Address</label>
+                                                <input type="text" class="form-control" name="emailAddress" required>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-6">
+                                            <div class="form-group">
+                                                <label>Password</label>
+                                                <input type="password" class="form-control" name="password" required>
+                                            </div>
+                                        </div>
+                                        <div class="col-6">
+                                            <div class="form-group">
+                                                <label>Confirm Password</label>
+                                                <input type="password" class="form-control" name="confirmPassword"
+                                                    srequired>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-6 form-role">
+                            <div class="card-body">
+                                <div class="forms">
+                                    <p></p>
+                                    <div class="form-group">
+                                        <label>User Type</label>
+                                        <select name="userType" id="user-type" class="form-control">
+                                            <option value="admin" class="form-control">Admin</option>
+                                            <option value="user">User</option>
+                                        </select>
+                                    </div>
+                                    <div class="form-group">
+                                        <label>Role</label>
+                                        <input type="text" class="form-control" name="role" id="role">
+                                    </div>
+                                    <div class="table-selection">
+                                        <table class="table table-hover">
+                                            <thead>
+                                                <tr>
+                                                    <th>Role</th>
+                                                    <th>Description</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                {{#each roles}}
+                                                    <tr>
+                                                        <td class="role">{{role}}</td>
+                                                        <td>{{description}}</td>
+                                                    </tr>
+                                                {{/each}}
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                    <div class="submit-button">
+                                        <button class="button submit">Create</button>
+                                        <a href="/admin/users-list" class="button cancel create-user-form">Cancel</a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</template>
+
+<!-- User_update -->
+<template name="User_update">
+    <div class="wrap">
+        {{> Alert_message}}
+        <div class="user-create-section">
+            <div class="card">
+                <form class="user-form" id="update-user-form">
+                    <div class="card-header form-title">
+                        <span style="font-size:15px;">EDIT USER</span>
+                    </div>
+                    <div class="row">
+                        <div class="col-6 form-inputs" style="height: 466px;">
+                            <div class="card-body">
+                                <div class="forms">
+                                    <p id="error-msg" style="color: #F16362;"></p>
+                                    <div class="row">
+                                        <div class="col-6">
+                                            <div class="form-group">
+                                                <label>First Name</label>
+                                                <input type="text" class="form-control" name="firstName" value="{{userData.profile.firstName}}"
+                                                    required>
+                                            </div>
+                                        </div>
+                                        <div class="col-6">
+                                            <div class="form-group">
+                                                <label>Last Name</label>
+                                                <input type="text" class="form-control" name="lastName" value="{{userData.profile.lastName}}"
+                                                    required>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-12">
+                                            <div class="form-group">
+                                                <label>Address</label>
+                                                <input type="text" class="form-control" name="address" value="{{userData.profile.address}}">
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-6">
+                                            <div class="form-group">
+                                                <label>Contact No.</label>
+                                                <input type="text" class="form-control" name="contactNo" value="{{userData.profile.contactNo}}">
+                                            </div>
+                                        </div>
+                                        <div class="col-6">
+                                            <div class="form-group">
+                                                <label>Email Address</label>
+                                                <input type="text" class="form-control" name="emailAddress" value="{{userEmailAddress}}"
+                                                    required>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-6">
+                                            <div class="form-group">
+                                                <label>Password</label>
+                                                <input type="password" class="form-control" name="password">
+                                            </div>
+                                        </div>
+                                        <div class="col-6">
+                                            <div class="form-group">
+                                                <label>Confirm Password</label>
+                                                <input type="password" class="form-control" name="confirmPassword"
+                                                    srequired>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-6 form-role">
+                            <div class="card-body">
+                                <div class="forms">
+                                    <p></p>
+                                    <div class="form-group">
+                                        <label>User Type</label>
+                                        <select name="type" id="userType" class="form-control" disabled>
+                                            <option value="{{userDatas.profile.type}}" class="form-control">{{ucFirst userData.profile.type}}</option>
+                                        </select>
+                                    </div>
+                                    <div class="form-group">
+                                        <label>Role</label>
+                                        <input type="text" class="form-control" name="role" id="updateRole" value="{{userData.profile.role.role}}">
+                                    </div>
+                                    <div class="table-selection">
+                                        <table class="table table-hover">
+                                            <thead>
+                                                <tr>
+                                                    <th>Role</th>
+                                                    <th>Description</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                {{#each roles}}
+                                                    <tr>
+                                                        <td class="role">{{role}}</td>
+                                                        <td>{{description}}</td>
+                                                    </tr>
+                                                {{/each}}
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                    <div class="submit-button">
+                                            <button class="button submit">Save</button>
+                                            <a href="/admin/users-list" class="button cancel create-user-form">Cancel</a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</template>

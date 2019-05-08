@@ -1,0 +1,102 @@
+.gu-mirror {
+    padding: 10px;
+    background-color: #fff;
+    border: solid 1px #dcdedf;
+    cursor: pointer;
+    border-radius: 4px;
+    height: 100px;
+    margin-bottom: 7px;
+}
+
+.gu-mirror .drag-title {
+    font-weight: 600;
+    font-size: 15px;
+    margin-top: -20px
+}
+
+.kanban-card {
+    background-color: #f7f7f7;
+    border: solid 1px #dcdedf;
+    border-radius: 4px;
+
+    .data {
+        border-radius: 3px 3px 0px 0px;
+        background-color: #977cda;
+        height: 5px;
+        transition: background-color 250ms ease 0s;
+    }
+
+    .kanban-content {
+        padding: 10px;
+
+        .card-header {
+            font-size: 16px;
+            margin-bottom: 10px;
+            padding: 5px 0;
+        }
+
+        .card-body {
+
+           .drag-button:hover {
+                background-color: #00000008 !important;
+                transition: all 0.15s ease-in;
+            }
+
+            .dragdrop {
+                    height: auto;
+                    min-height: 50px;
+                
+                .draggable {
+                    padding: 10px;
+                    background-color: #fff;
+                    border: solid 1px #dcdedf;
+                    cursor: pointer;
+                    border-radius: 4px;
+                    margin-bottom: 7px;
+                    overflow: hidden;
+                    position: relative;
+
+                    .vertical-icon {
+                        align-items: center;
+                        background-color: rgba(0, 0, 0, 0.3);
+                        border-bottom-left-radius: 4px;
+                        border-top-left-radius: 4px;
+                        cursor: move;
+                        display: flex;
+                        justify-content: center;
+                        overflow: hidden;
+                        position: absolute;
+                        width: 20px;
+                        transform: translate3d(-100%, 0px, 0px);
+                        transition: transform 250ms ease 0s;
+                        height: 40px;
+                        left: 0;
+                        top: -1px;
+                    }
+                }
+                .draggable:hover .vertical-icon{
+                    transform: translate3d(0%, 0px, 0px);
+                }
+            }
+
+            .add-content {
+                min-height: 40px;
+
+                .drag-button {
+                    padding: 4px;
+                    background-color: #fff;
+                    border: solid 1px #dcdedf;
+                    cursor: pointer;
+                    border-radius: 4px;
+                    text-align: center;
+                }
+            }
+        }
+    }
+
+    p {
+        font-weight: 500;
+        color: #494f5c;
+        display: inline;
+    }
+}

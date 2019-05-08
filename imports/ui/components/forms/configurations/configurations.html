@@ -1,0 +1,108 @@
+<template name="Configuration_create">
+    <div class="configuration-section">
+        <div class="wrap">
+            {{> Alert_message}}
+            {{> Configuration_Error}}
+            <div class="card">
+                <form class="configuration-form" id="configuration-form">
+                    <div class="card-header form-title">
+                        <span style="font-size:15px;">Configuration</span>
+                    </div>
+                    <div class="row">
+                        <div class="col-6 form-inputs">
+                            <div class="card-body">
+                                <div class="forms">
+                                    <p id="error-msg" style="color: #F16362;"></p>
+                                    <div class="row">
+                                        <div class="col-11">
+                                            <div class="form-group">
+                                                <label>Product</label>
+                                                <input type="hidden" name="productId" id="product_id">
+                                                <input type="text" class="form-control lookup" name="product" id="product"
+                                                    required>
+                                            </div>
+                                        </div>
+                                        <div class="col-1">
+                                            <br>
+                                            <a href="" class="form-choose choose-product"><i class="fa fa-ellipsis-h" aria-hidden="true"></i></a>
+                                            {{> Products}}
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-12">
+                                            <div class="form-group">
+                                                <label>Sample Size</label>
+                                                <input type="number" class="form-control" name="sampleSize" required>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-11">
+                                            <div class="form-group">
+                                                <label>Tester</label>
+                                                <input type="hidden" name="testerId" id="tester_id">
+                                                <input type="text" class="form-control lookup" name="tester" id="tester"
+                                                    required>
+                                            </div>
+                                        </div>
+                                        <div class="col-1">
+                                            <br>
+                                            <a href="" class="form-choose choose-tester"><i class="fa fa-ellipsis-h" aria-hidden="true"></i></a>
+                                            {{> Testers}}
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-11">
+                                            <div class="form-group">
+                                                <label>Parameter</label>
+                                                <input type="hidden" name="parameterId" id="parameter_id">
+                                                <input type="text" class="form-control lookup" name="parameter" id="parameter"
+                                                    required>
+                                            </div>
+                                        </div>
+                                        <div class="col-1">
+                                            <br>
+                                            <a href="javascript:void(0)" class="form-choose choose-parameter"><i class="fa fa-ellipsis-h"
+                                                    aria-hidden="true"></i></a>
+                                            {{> Parameters}}
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-6 form-role">
+                            <div class="card-body">
+                                <div class="forms">
+                                    <p></p>
+                                    <div class="form-group">
+                                        <label>Upper Control Limit</label>
+                                        <input type="number" class="form-control" name="upperControlLimit">
+                                    </div>
+                                    <div class="form-group">
+                                        <label>Lower Control Limit</label>
+                                        <input type="number" class="form-control" name="lowerControlLimit">
+                                    </div>
+                                    <div class="form-group">
+                                        <label>Upper Specification Limit</label>
+                                        <input type="number" class="form-control" name="upperSpecLimit">
+                                    </div>
+                                    <div class="form-group">
+                                        <label>Lower Specification Limit</label>
+                                        <input type="number" class="form-control" name="lowerSpecLimit">
+                                    </div>
+                                    <div class="submit-button">
+                                            <button class="button submit">Create</button>
+                                            <a href="/configurations-list" class="button cancel create-user-form">Cancel</a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="card-footer">
+
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</template>

@@ -1,0 +1,14 @@
+<template name="Admin_home">
+    <!-- main -->
+    <main class="main">
+        <div class="wrapper">
+            {{> Template.dynamic template=sidebar}}
+            <div class="page-container">
+                {{> Template.dynamic template=header}}
+                <div class="content">
+                    {{> Template.dynamic template=main}}
+                </div>
+            </div>
+        </div>
+    </main>
+</template>

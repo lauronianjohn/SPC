@@ -1,0 +1,24 @@
+<template name="TesterChart">
+        <div class="charts table-section">
+            <label class="vertical">Parameters</label>
+            <div class="custom-table">
+                <table class="white-table">
+                    <tr class="table-header">
+                        <th class="head-title"></th>
+                        {{#each testers}}
+                        <th class="head-title">{{name}}</th>
+                        {{/each}}
+                    </tr>
+                    {{testerResult}}
+                    {{#each parameters}}
+                    <tr class="table-row-cell" id="{{trim name}}">
+                        <td class="table-cell">{{name}}</td>
+                        {{#each testers}}
+                        <td class="table-cell"><span class="cell-result-empty" id="{{trim name}}"></span></td>
+                        {{/each}}
+                    </tr>
+                    {{/each}}
+                </table>
+            </div>
+        </div>
+</template>
